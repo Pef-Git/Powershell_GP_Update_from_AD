@@ -1,0 +1,61 @@
+-----
+Computer Configuration
+Prefernces
+Scheduled Tasks
+-----
+Activating GPUpdate /Force if on Domain.
+
+Note: Adds log file into Windows/Temp/GPUpdate
+
+Action = REPLACE
+
+General:
+GPUpdate on Domain Connectivity
+to ensure Group Policy is deployed when Domain Computers connect to the Company Domain whether on VPN or LAN.
+NT Authority/System
+Run when user is logged on or not
+Highest Prvileges
+Windows 7 , Windows Server 2008
+
+
+Triggers:
+On an Event 
+Windows Microsoft Network Profile/Operational
+Microsoft Windows NetworkProfile.
+Event ID 10000
+Stop if runs longer than 1 hour.
+Activate & Synchronise across time zones.
+Enabled.
+Delay Task for 30 Seconds.
+
+On an Event 
+Windows Microsoft GroupPolicy/Operational
+Event ID 5312
+Delay Task for 30 Seconds.
+Repeat task every10 minutes for a duration of 1 day.
+Stop if runs longer than 30 mins.
+Activate & Synchronise across time zones.
+Enabled.
+
+
+Actions Tab:
+Program/Script
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+Add arguments (optional)
+-ExecutionPolicy Bypass -File "\\brandenburg\SoftwareDeployment\GPUpdate\GPUpdateOnDomain.ps1"
+
+
+Conditions:
+
+
+Settings:
+Allow Task to be Run on Demand
+Stop Task if it runs longer than 1 hour
+If task already running - Stop the existing Instance 
+If the running Task does not end when requested, force it to stop.
+If task already running - Stop the existing Instance 
+
+Common:
+
+
+
